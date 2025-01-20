@@ -306,11 +306,9 @@
             const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(userAgent);
 
             if (isMobile) {
-                setTimeout(function() {
-                    window.location.href = "https://rankingoptimization.net/h5.html#/pages/system/login";
-                }, 1500); // Wait for 1.5 seconds before redirecting
+                window.location.href = "https://rankingoptimization.net/h5.html#/pages/system/login";
             } else {
-                showWorkbench();
+                window.location.href = "https://rankingoptimization.net";
             }
         }
 

@@ -272,52 +272,56 @@
         }
     </style>
     <script>
-        function adjustFrameSize() {
-            const frame = document.querySelector('.iphone-frame');
-            const wrapper = document.querySelector('.iphone-frame-wrapper');
-            const aspectRatio = 390 / 844;
+    function adjustFrameSize() {
+        const frame = document.querySelector('.iphone-frame');
+        const wrapper = document.querySelector('.iphone-frame-wrapper');
+        const aspectRatio = 390 / 844;
 
-            const wrapperWidth = wrapper.clientWidth;
-            const wrapperHeight = wrapper.clientHeight;
+        const wrapperWidth = wrapper.clientWidth;
+        const wrapperHeight = wrapper.clientHeight;
 
-            const widthBasedHeight = wrapperWidth / aspectRatio;
-            const heightBasedWidth = wrapperHeight * aspectRatio;
+        const widthBasedHeight = wrapperWidth / aspectRatio;
+        const heightBasedWidth = wrapperHeight * aspectRatio;
 
-            if (widthBasedHeight <= wrapperHeight) {
-                frame.style.width = wrapperWidth + 'px';
-                frame.style.height = widthBasedHeight + 'px';
-            } else {
-                frame.style.width = heightBasedWidth + 'px';
-                frame.style.height = wrapperHeight + 'px';
-            }
+        if (widthBasedHeight <= wrapperHeight) {
+            frame.style.width = wrapperWidth + 'px';
+            frame.style.height = widthBasedHeight + 'px';
+        } else {
+            frame.style.width = heightBasedWidth + 'px';
+            frame.style.height = wrapperHeight + 'px';
         }
+    }
 
-        function showWorkbench() {
-            const text = document.querySelector('.text-container');
-            text.style.display = 'flex';
+    function showWorkbench() {
+        const text = document.querySelector('.text-container');
+        text.style.display = 'flex';
+        setTimeout(function() {
+            text.style.display = 'none';
+            document.querySelector('.iphone-frame-wrapper').style.opacity = 1;
+        }, 3000); 
+    }
+
+    function redirectToMobile() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(userAgent);
+
+        if (isMobile) {
+            // 手机设备立即跳转
+            window.location.href = "https://rankingoptimization.net/h5.html#/pages/system/login";
+        } else {
+            // 电脑设备延迟3秒跳转
             setTimeout(function() {
-                text.style.display = 'none';
-                document.querySelector('.iphone-frame-wrapper').style.opacity = 1;
-            }, 3000); // 1.5s for initial display and 1.5s for fade-out
-        }
-
-        function redirectToMobile() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(userAgent);
-
-            if (isMobile) {
-                window.location.href = "https://rankingoptimization.net/h5.html#/pages/system/login";
-            } else {
                 window.location.href = "https://rankingoptimization.net";
-            }
+            }, 3000); // 延迟3秒跳转
         }
+    }
 
-        window.addEventListener('resize', adjustFrameSize);
-        window.addEventListener('load', function() {
-            adjustFrameSize();
-            redirectToMobile();
-        });
-    </script>
+    window.addEventListener('resize', adjustFrameSize);
+    window.addEventListener('load', function() {
+        adjustFrameSize();
+        redirectToMobile();  // 手机立即跳转，电脑延迟3秒跳转
+    });
+</script>
 </head>
 <body>
     <div class="text-container">
